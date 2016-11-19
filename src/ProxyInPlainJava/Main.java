@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-List list=new ArrayList();
+ArrayList list=new ArrayList();
         list.add(2);
         list.add(3);
 /*
@@ -24,6 +24,7 @@ Now, if you try to add elements to the proxy by calling any add methods, it wonâ
                 Main.class.getClassLoader(),
                 new Class[] { List.class },
                 new NoOpAddInvocationHandler(list));
+        System.out.println(proxy);
         proxy.add(4);
         proxy.add(6);
         proxy.add(5);

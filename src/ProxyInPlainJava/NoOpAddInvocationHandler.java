@@ -17,7 +17,7 @@ public class NoOpAddInvocationHandler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (method.getName().startsWith("add")) {
-            System.out.println("lllllllllllll");
+            System.out.println(proxy);
             return false;
         }
         return method.invoke(proxied, args);
