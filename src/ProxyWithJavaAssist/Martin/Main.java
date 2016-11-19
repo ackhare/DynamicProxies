@@ -10,20 +10,14 @@ import java.lang.reflect.Method;
  * Created by chetan on 19/11/16.
  */
 public class Main {
-    public static void main(String[] args)  {
-//final IExample example = JavaProxy.createExample();
-//    long measure = TimeMeasurement.measure(new TimeMeasurement.Execution() {
-//        @Override
-//        public void execute() {
-//            for (long i = 0; i < JavassistProxyTest.NUMBER_OF_ITERATIONS; i++) {
-//                example.setName("name");
-//            }
-//        }
-//    });
-//    System.out.println("Proxy: "+measure+" ms");
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        final IExample example = abcd();
+
+        example.setName("name");
+
     }
 
-    public IExample abcd() throws IllegalAccessException, InstantiationException {
+    public static IExample abcd() throws IllegalAccessException, InstantiationException {
         ProxyFactory factory = new ProxyFactory();
         factory.setSuperclass(Example.class);
         Class aClass = factory.createClass();
@@ -31,10 +25,12 @@ public class Main {
         MethodHandler methodHandler = new MethodHandler() {
             @Override
             public Object invoke(Object self, Method overridden, Method proceed, Object[] args) throws Throwable {
+                //public void ProxyWithJavaAssist.Martin.Example.setName(java.lang.String)
+                System.out.println(overridden.getName());
                 return proceed.invoke(newInstance, args);
             }
         };
-        ((ProxyObject)newInstance).setHandler(methodHandler);
+        ((ProxyObject) newInstance).setHandler(methodHandler);
         return newInstance;
     }
 }

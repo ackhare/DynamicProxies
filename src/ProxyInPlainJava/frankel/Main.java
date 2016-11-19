@@ -1,4 +1,4 @@
-package ProxyInPlainJava;
+package ProxyInPlainJava.frankel;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
